@@ -101,7 +101,7 @@
           # The dependency on v8_base should come from a transitive
           # dependency however the Android toolchain requires libv8_base.a
           # to appear before libv8_snapshot.a so it's listed explicitly.
-          'dependencies': ['v8_base', 'v8_nosnapshot'],
+          'dependencies': ['v8_base', 'v8_nosnapshot', 'v8_libbase', 'v8_libplatform'],
         }],
         ['v8_use_snapshot=="true" and v8_use_external_startup_data==0', {
           # The dependency on v8_base should come from a transitive
@@ -2023,7 +2023,8 @@
           ]},
         ],
         ['OS=="solaris"', {
-            'link_settings': {
+            'defines': ['_GLIBCXX_USE_C99_MATH'],
+	    'link_settings': {
               'libraries': [
                 '-lnsl -lrt',
             ]},
@@ -2208,7 +2209,7 @@
                       '<(PRODUCT_DIR)/natives_blob.bin',
                     ],
                     'action': [
-                      'python', '<@(_inputs)', '<(PRODUCT_DIR)/natives_blob.bin'
+                      '<(PYTHON_EXECUTABLE)', '<@(_inputs)', '<(PRODUCT_DIR)/natives_blob.bin'
                     ],
                   }],
                 ],
@@ -2217,7 +2218,7 @@
                   '<(PRODUCT_DIR)/natives_blob.bin',
                 ],
                 'action': [
-                  'python', '<@(_inputs)', '<(PRODUCT_DIR)/natives_blob.bin'
+                  '<(PYTHON_EXECUTABLE)', '<@(_inputs)', '<(PRODUCT_DIR)/natives_blob.bin'
                 ],
               }],
             ],
@@ -2289,12 +2290,13 @@
         {
           'action_name': 'js2c',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(library_files)',
           ],
           'outputs': ['<(SHARED_INTERMEDIATE_DIR)/libraries.cc'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/libraries.cc',
             'CORE',
@@ -2304,12 +2306,13 @@
         {
           'action_name': 'js2c_bin',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(library_files)',
           ],
           'outputs': ['<@(libraries_bin_file)'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/libraries.cc',
             'CORE',
@@ -2321,12 +2324,13 @@
         {
           'action_name': 'js2c_experimental',
           'inputs': [
+	    '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<@(experimental_library_files)',
           ],
           'outputs': ['<(SHARED_INTERMEDIATE_DIR)/experimental-libraries.cc'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/experimental-libraries.cc',
             'EXPERIMENTAL',
@@ -2336,12 +2340,13 @@
         {
           'action_name': 'js2c_experimental_bin',
           'inputs': [
+	    '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<@(experimental_library_files)',
           ],
           'outputs': ['<@(libraries_experimental_bin_file)'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/experimental-libraries.cc',
             'EXPERIMENTAL',
@@ -2353,12 +2358,13 @@
         {
           'action_name': 'js2c_extras',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(v8_extra_library_files)',
           ],
           'outputs': ['<(SHARED_INTERMEDIATE_DIR)/extras-libraries.cc'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/extras-libraries.cc',
             'EXTRAS',
@@ -2368,12 +2374,13 @@
         {
           'action_name': 'js2c_extras_bin',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(v8_extra_library_files)',
           ],
           'outputs': ['<@(libraries_extras_bin_file)'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/extras-libraries.cc',
             'EXTRAS',
@@ -2385,14 +2392,15 @@
         {
           'action_name': 'js2c_experimental_extras',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(v8_experimental_extra_library_files)',
           ],
           'outputs': [
             '<(SHARED_INTERMEDIATE_DIR)/experimental-extras-libraries.cc',
           ],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/experimental-extras-libraries.cc',
             'EXPERIMENTAL_EXTRAS',
@@ -2402,12 +2410,13 @@
         {
           'action_name': 'js2c_experimental_extras_bin',
           'inputs': [
-            '../tools/js2c.py',
+            '<(PYTHON_EXECUTABLE)',
+	    '../tools/js2c.py',
             '<@(v8_experimental_extra_library_files)',
           ],
           'outputs': ['<@(libraries_experimental_extras_bin_file)'],
           'action': [
-            'python',
+            '<(PYTHON_EXECUTABLE)',
             '../tools/js2c.py',
             '<(SHARED_INTERMEDIATE_DIR)/experimental-extras-libraries.cc',
             'EXPERIMENTAL_EXTRAS',

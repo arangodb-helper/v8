@@ -73,12 +73,12 @@
           # depending on the packages installed on the local machine. Set this
           # to 0 to build against locally installed headers and libraries (e.g.
           # if packaging for a linux distro)
-          'use_sysroot%': 1,
+          'use_sysroot%': 0,
         },
         'host_arch%': '<(host_arch)',
         'target_arch%': '<(target_arch)',
         'use_sysroot%': '<(use_sysroot)',
-        'base_dir%': '<!(cd <(DEPTH) && python -c "import os; print os.getcwd()")',
+        'base_dir%': '<!(cd <(DEPTH) && <(PYTHON_EXECUTABLE) -c "import os; print os.getcwd()")',
 
         # Instrument for code coverage and use coverage wrapper to exclude some
         # files. Uses gcov if clang=0 is set explicitly. Otherwise,
@@ -508,14 +508,14 @@
           '-Wno-uninitialized',
         ],
       }],
-      ['clang==1 or host_clang==1', {
+      #['clang==1 or host_clang==1', {
         # This is here so that all files get recompiled after a clang roll and
         # when turning clang on or off.
         # (defines are passed via the command line, and build systems rebuild
         # things when their commandline changes). Nothing should ever read this
         # define.
-        'defines': ['CR_CLANG_REVISION=<!(python <(DEPTH)/tools/clang/scripts/update.py --print-revision)'],
-      }],
+	#'defines': ['CR_CLANG_REVISION=<!(<(PYTHON_EXECUTABLE) <(DEPTH)/tools/clang/scripts/update.py --print-revision)'],
+      #}],
       ['clang==1 and target_arch=="ia32"', {
         'cflags': ['-mstack-alignment=16', '-mstackrealign'],
       }],
@@ -712,13 +712,13 @@
           ['sysroot!="" and clang==1', {
             'target_conditions': [
               ['_toolset=="target"', {
-                'cflags': [
-                  '--sysroot=<(sysroot)',
-                ],
-                'ldflags': [
-                  '--sysroot=<(sysroot)',
-                  '<!(<(DEPTH)/build/linux/sysroot_ld_path.sh <(sysroot))',
-                ],
+#                'cflags': [
+#                  '--sysroot=<(sysroot)',
+#                ],
+#                'ldflags': [
+#                  '--sysroot=<(sysroot)',
+#                  '<!(<(DEPTH)/build/linux/sysroot_ld_path.sh <(sysroot))',
+#                ],
               }]]
           }],
         ],
@@ -767,6 +767,8 @@
         ],
       },  # target_defaults
     }],  # OS=="mac"
+    ['OS=="solaris"', {'defines': ['_GLIBCXX_USE_C99_MATH']}],
+    ['OS=="solaris"', {'target_defaults': {'cflags': ['-m64'], 'ldflags': ['-march=x86-64', '-m64']}}],
     ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris" \
        or OS=="netbsd" or OS=="aix"', {
       'target_defaults': {
@@ -799,7 +801,7 @@
           }],
           [ 'clang==1 and (v8_target_arch=="x64" or v8_target_arch=="arm64" \
             or v8_target_arch=="mips64el")', {
-            'cflags': [ '-Wshorten-64-to-32' ],
+            'cflags': [ ] # removed -Wshorten-64-to-32 here, Max
           }],
           [ 'host_arch=="ppc64" and OS!="aix"', {
             'cflags': [ '-mminimal-toc' ],
@@ -956,7 +958,7 @@
             'EnableFunctionLevelLinking': 'true',
             'RuntimeTypeInfo': 'false',
             'WarningLevel': '3',
-            'WarnAsError': 'true',
+            'WarnAsError': 'false',
             'DebugInformationFormat': '3',
             'Detect64BitPortabilityProblems': 'false',
             'conditions': [
@@ -1109,7 +1111,7 @@
               }],
               ['v8_target_arch=="x64" or v8_target_arch=="arm64" \
                 or v8_target_arch=="mips64el"', {
-                'xcode_settings': {'WARNING_CFLAGS': ['-Wshorten-64-to-32']},
+                'xcode_settings': {'WARNING_CFLAGS': []}, # '-Wshorten-64-to-32' removed by kaveh on mac
               }],
             ],
           }],
@@ -1186,6 +1188,7 @@
                 '<!(<(android_toolchain)/*-gcc -print-libgcc-file-name)',
                 '-lc',
                 '-ldl',
+		'-lstdc++',
                 '-lm',
             ],
             'conditions': [
