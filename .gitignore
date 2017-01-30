@@ -74,7 +74,6 @@ shell_g
 /tools/clang
 /tools/gcmole/gcmole-tools
 /tools/gcmole/gcmole-tools.tar.gz
-/tools/gyp
 /tools/jsfunfuzz/jsfunfuzz
 /tools/jsfunfuzz/jsfunfuzz.tar.gz
 /tools/luci-go/linux64/isolate
