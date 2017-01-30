@@ -60,7 +60,6 @@ shell_g
 /test/test262/data.tar
 /test/test262/harness
 /testing/gmock
-/testing/gtest
 !/third_party/binutils
 !/third_party/inspector_protocol
 /third_party
