@@ -1,0 +1,3 @@
+[submodule "tools/gyp"]
+	path = tools/gyp
+	url = git@github.com:arangodb-helper/gyp.git
