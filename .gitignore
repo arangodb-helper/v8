@@ -64,7 +64,6 @@ shell_g
 /third_party
 /third_party/android_tools
 /third_party/cygwin
-/third_party/icu
 /third_party/instrumented_libraries
 /third_party/inspector_protocol
 /third_party/jinja2
