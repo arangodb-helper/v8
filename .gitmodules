@@ -7,3 +7,6 @@
 [submodule "testing/gtest"]
 	path = testing/gtest
 	url = https://github.com/arangodb-helper/gtest
+[submodule "base/trace_event"]
+	path = base/trace_event
+	url = git@github.com:arangodb-helper/v8_trace_event_common.git
