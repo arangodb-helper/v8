@@ -5,7 +5,7 @@
 	path = third_party/icu
 	url = git@github.com:arangodb-helper/icu.git
 [submodule "testing/gtest"]
-	path = testing/gtest
+	path = testing/googletest_subrepo
 	url = https://github.com/arangodb-helper/gtest
 [submodule "base/trace_event"]
 	path = base/trace_event
