@@ -25,7 +25,7 @@ import gyp
 
 
 # Use MSVS2013 as the default toolchain.
-CURRENT_DEFAULT_TOOLCHAIN_VERSION = '2013'
+CURRENT_DEFAULT_TOOLCHAIN_VERSION = '2015'
 
 
 def SetEnvironmentAndGetRuntimeDllDirs():
