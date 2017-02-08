@@ -547,7 +547,6 @@
             # We don't want to get warnings from third-party code,
             # so remove any existing warning-enabling flags like -Wall.
             'cflags!': [
-              '-pedantic',
               '-Wall',
               '-Werror',
               '-Wextra',
@@ -777,7 +776,6 @@
           '<(werror)',
           '-Wno-unused-parameter',
           '-pthread',
-          '-pedantic',
           '-Wmissing-field-initializers',
           '-Wno-gnu-zero-variadic-macro-arguments',
         ],
@@ -794,7 +792,6 @@
           # arguments in gcc.
           [ 'clang==0', {
             'cflags!' : [
-              '-pedantic' ,
               # Don't warn about unrecognized command line option.
               '-Wno-gnu-zero-variadic-macro-arguments',
             ],
