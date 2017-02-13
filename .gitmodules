@@ -5,8 +5,8 @@
 	path = third_party/icu
 	url = https://github.com/arangodb-helper/icu.git
 [submodule "testing/gtest"]
-	path = testing/googletest_subrepo
-	url = https://github.com/arangodb-helper/gtest
+	path = testing/gtest
+	url = https://github.com/arangodb-helper/gperf_mock
 [submodule "base/trace_event/common"]
 	path = base/trace_event/common
 	url = https://github.com/arangodb-helper/v8_trace_event_common.git
