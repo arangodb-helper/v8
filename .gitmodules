@@ -6,10 +6,10 @@
 	url = https://github.com/arangodb-helper/icu.git
 [submodule "testing/gtest"]
 	path = testing/gtest
-	url = https://github.com/arangodb-helper/gperf_mock
+	url = https://github.com/arangodb-helper/gperf_mock.git
 [submodule "base/trace_event/common"]
 	path = base/trace_event/common
 	url = https://github.com/arangodb-helper/v8_trace_event_common.git
 [submodule "testing/googletest_subrepo"]
 	path = testing/googletest_subrepo
-	url = https://github.com/arangodb-helper/gtest
+	url = https://github.com/arangodb-helper/gtest.git
