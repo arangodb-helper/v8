@@ -43,6 +43,13 @@ import vs_toolchain
 script_dir = os.path.dirname(os.path.realpath(__file__))
 v8_root = os.path.abspath(os.path.join(script_dir, os.pardir))
 
+
+if ("-Dbyteorder=big" not in sys.argv and "-Dbyteorder=little" not in sys.argv):
+    sys.argv.append("-Dbyteorder=" + sys.byteorder)
+        
+sys.argv.append("-DPYTHON_EXECUTABLE=" + sys.executable)
+print("x" *80)
+
 sys.path.insert(0, os.path.join(v8_root, 'tools', 'gyp', 'pylib'))
 import gyp
 
@@ -181,7 +188,7 @@ if __name__ == '__main__':
     for f in glob.glob(os.path.join(v8_root, 'out', 'Makefile.*')):
       os.unlink(f)
     # --generator-output defines where the Makefile goes.
-    gyp_args.append('--generator-output=out')
+    # gyp_args.append('--generator-output=out')
     # -Goutput_dir defines where the build output goes, relative to the
     # Makefile. Set it to . so that the build output doesn't end up in out/out.
     gyp_args.append('-Goutput_dir=.')

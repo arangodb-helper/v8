@@ -8429,6 +8429,8 @@ Isolate* Isolate::New(const Isolate::CreateParams& params) {
 Isolate* IsolateNewImpl(internal::Isolate* isolate,
                         const v8::Isolate::CreateParams& params) {
   Isolate* v8_isolate = reinterpret_cast<Isolate*>(isolate);
+  isolate->set_oom_behavior(params.oom_error_callback);
+  isolate->set_exception_behavior(params.fatal_error_callback);
   CHECK(params.array_buffer_allocator != NULL);
   isolate->set_array_buffer_allocator(params.array_buffer_allocator);
   if (params.snapshot_blob != NULL) {

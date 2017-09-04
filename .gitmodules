@@ -1,0 +1,12 @@
+[submodule "tools/gyp"]
+	path = tools/gyp
+	url = https://github.com/arangodb-helper/gyp.git
+[submodule "third_party/icu"]
+	path = third_party/icu
+	url = https://github.com/arangodb-helper/icu.git
+[submodule "base/trace_event/common"]
+	path = base/trace_event/common
+	url = https://github.com/arangodb-helper/v8_trace_event_common.git
+[submodule "testing/gtest"]
+	path = testing/gtest
+	url = https://github.com/arangodb-helper/gtest_mock.git

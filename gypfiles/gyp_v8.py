@@ -36,6 +36,14 @@
 # useful.
 
 import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
+if ("-Dbyteorder=big" not in sys.argv and "-Dbyteorder=little" not in sys.argv):
+    sys.argv.append("-Dbyteorder=" + sys.byteorder)
+        
+sys.argv.append("-DPYTHON_EXECUTABLE=" + sys.executable)
+
+sys.byteorder
 path = os.path.abspath(os.path.split(__file__)[0])
 execfile(os.path.join(path, 'gyp_v8'))

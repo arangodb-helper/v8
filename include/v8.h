@@ -6717,7 +6717,9 @@ class V8_EXPORT Isolate {
           add_histogram_sample_callback(nullptr),
           array_buffer_allocator(nullptr),
           external_references(nullptr),
-          allow_atomics_wait(true) {}
+          allow_atomics_wait(true),
+          oom_error_callback(nullptr),
+          fatal_error_callback(nullptr) {}
 
     /**
      * The optional entry_hook allows the host application to provide the
@@ -6780,6 +6782,10 @@ class V8_EXPORT Isolate {
      * this isolate. This can also be configured via SetAllowAtomicsWait.
      */
     bool allow_atomics_wait;
+
+    OOMErrorCallback oom_error_callback;
+    
+    FatalErrorCallback fatal_error_callback;
   };
 
 

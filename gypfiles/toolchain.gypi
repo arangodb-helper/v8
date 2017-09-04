@@ -40,7 +40,7 @@
     'has_valgrind%': 0,
     'coverage%': 0,
     'v8_target_arch%': '<(target_arch)',
-    'v8_host_byteorder%': '<!(python -c "import sys; print sys.byteorder")',
+    'v8_host_byteorder%': '<(byteorder)',
     'force_dynamic_crt%': 0,
 
     # Setting 'v8_can_use_vfp32dregs' to 'true' will cause V8 to use the VFP
@@ -970,6 +970,8 @@
         #       present in VS 2003 and earlier.
         'msvs_disabled_warnings': [4351],
         'msvs_configuration_attributes': {
+          'OutputDirectory': '<(generator_output)\\<(DEPTH)\\build\\$(ConfigurationName)',
+          'IntermediateDirectory': '$(OutDir)\\obj\\$(ProjectName)',
           'CharacterSet': '1',
         },
       }],
